@@ -2,6 +2,8 @@
 #pragma once
 #include <SFML/Graphics.hpp>
 #include "Particle.h"
+#include <SFML/Audio.hpp>
+
 using namespace sf;
 using namespace std;
 
@@ -13,6 +15,13 @@ private:
 
 	//vector for Particles
 	vector<Particle> m_particles;
+
+	// For sound
+	Sound sound;
+	SoundBuffer soundBuffer;
+
+	Sound womp;
+	SoundBuffer wompBuffer;
 
 	// Private functions for internal use only
 	void input();

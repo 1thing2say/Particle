@@ -8,6 +8,20 @@ Engine::Engine()
 {
     // Create a window
     m_Window.create(VideoMode::getDesktopMode(), "Particle System", Style::Default);
+    // Initialize sound
+    if (!soundBuffer.loadFromFile("sound/bubble.ogg")) {
+        cout << "Failed to load bubble.ogg" << endl;
+        exit(1);
+    }
+
+    sound.setBuffer(soundBuffer);
+    
+    if (!wompBuffer.loadFromFile("sound/womp.ogg")) {
+        cout << "Failed to load womp.ogg" << endl;
+        exit(1);
+    }
+
+    womp.setBuffer(wompBuffer); 
 }
 
 void Engine::run()
@@ -46,10 +60,16 @@ void Engine::input()
         if (event.type == Event::KeyPressed && event.key.code == Keyboard::Escape) {
             m_Window.close();
         }
+        if (event.type == Event::MouseButtonPressed && event.mouseButton.button == Mouse::Right)
+        {
+            womp.play();
+        }
 
         // Handle Mouse Click
         if (event.type == Event::MouseButtonPressed && event.mouseButton.button == Mouse::Left)
         {
+            // Play sound
+            sound.play();
             // Create 5 particles
             for (int i = 0; i < 5; i++)
             {
